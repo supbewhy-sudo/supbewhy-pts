@@ -20,7 +20,7 @@ PTS 是围绕 GPT-5.6 这次模型更新制作的。OpenAI 的 GPT-5.6 指南强
 
 我会在小红书记录设计、审美积累、创作实践，以及逐步搭建 AI 工作流的过程：
 
-> 📕 [在小红书关注我](https://www.xiaohongshu.com/user/profile/5a04313511be1005cafea0f9)
+> 📕 [小红书：supBewhY](https://www.xiaohongshu.com/user/profile/5a04313511be1005cafea0f9)
 
 ## 为什么需要 PTS
 
