@@ -3,10 +3,10 @@
 ## Snapshot
 
 - Engine target: GPT-5.6
-- Reviewed: 2026-07-14
+- Reviewed: 2026-07-15
 - Official guide: https://developers.openai.com/api/docs/guides/latest-model
 
-This file records the basis of PTS rules. It is a maintained interpretation, not a verbatim copy of the official guide.
+This file records the basis of PTS rules. It is a maintained interpretation, not a verbatim copy of the official guide. PTS is an independent project, not an official OpenAI product or Skill.
 
 ## 1. GPT-5.6-specific direction
 

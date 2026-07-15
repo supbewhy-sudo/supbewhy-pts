@@ -1,11 +1,13 @@
 ---
 name: supbewhy-pts
-description: Use when the user uses PTS as a prompt-transformation command, uses PST as an obvious typo in that same context, asks to optimize or rewrite an existing prompt for GPT-5.6, or asks to create a GPT-5.6 prompt from a brief. Do not use for unrelated meanings of PTS/PST, ordinary task execution, bare author aliases supɃewhY/supBewhY/supbewhy, or other-model prompts unless the user explicitly invokes PTS or requests migration.
+description: "Compile an existing prompt or brief into a lean, outcome-focused task specification designed primarily for GPT-5.6. Use when the user asks to optimize, rewrite, migrate, or create a GPT-5.6 prompt; explicitly uses PTS as a prompt-transformation command; starts a message with `pts:` immediately followed by source content; starts with `pts` plus a space and source content; or uses PST as an obvious typo in that same context. Match PTS case-insensitively. Do not use for bare `pts`, unrelated meanings of PTS/PST, ordinary task execution, bare author aliases supɃewhY/supBewhY/supbewhy, or other-model prompts unless the user explicitly invokes PTS or requests migration."
 ---
 
 # supɃewhY - PTS
 
-PTS means **Prompt To Spec**: turn an existing prompt or brief into the smallest sufficient task specification for reliable execution.
+PTS means **Prompt To Spec**: turn an existing prompt or brief into the smallest sufficient task specification for reliable GPT-5.6 execution.
+
+Design primarily for GPT-5.6's leaner, intent-aware prompting behavior. Preserve another target model or tool when the user explicitly names it.
 
 **Golden rule:** Task immutable; prompt mutable.
 
@@ -17,6 +19,8 @@ PTS has two functions:
 2. Create a prompt from a user brief.
 
 Do not treat PTS as a prompt polisher, prompt compressor, or task-execution mode.
+
+Treat `PTS` case-insensitively. At the start of a message, accept both `pts:<source>` and `pts <source>` as compact commands when source content is present. A bare `pts` or an unrelated acronym use does not trigger the workflow.
 
 ## Non-negotiable rules
 
