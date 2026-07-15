@@ -1,0 +1,13 @@
+# Personal and internal project context
+/AGENTS.md
+/MEMORY.md
+/docs/superpowers/
+
+# macOS
+.DS_Store
+
+# Python caches and local environments
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/

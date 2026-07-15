@@ -1,0 +1,167 @@
+[
+  {
+    "id": "scope-natural-business-review",
+    "category": "scope_fidelity",
+    "name": "自然商业审查不得升级成尽调模板",
+    "input": "PTS 一下：我准备把这份商业计划拿去跟潜在合作方聊。请检查市场机会、用户需求、赚钱方式、成本和执行难度，告诉我哪里容易被质疑、缺什么证据、主要风险和下一步先补什么，最后判断继续推进、改完再推进还是暂停。",
+    "should_trigger": true,
+    "expected_mode": "final",
+    "required": ["保留合作方沟通场景", "保留五类检查目标", "保留三选一结论"],
+    "forbidden": ["擅自扩展为完整投资尽调", "无依据固定 150 字", "无依据增加信心评分", "强制每类输出五个字段"],
+    "rationale": "复现已观察到的过度编译失败。"
+  },
+  {
+    "id": "remove-performative-noise",
+    "category": "noise_removal",
+    "name": "删除表演式思考但保留可见交付",
+    "input": "PTS 一下：你是世界顶级商业专家，请深入思考，模拟五位专家讨论并三轮反思。审查这份计划，指出关键风险、证据不足和下一步建议。",
+    "should_trigger": true,
+    "expected_mode": "final",
+    "required": ["关键风险", "证据不足", "下一步建议"],
+    "forbidden": ["世界顶级专家", "五位专家", "三轮反思", "深入思考"],
+    "rationale": "检查噪音删除不能误删可见结果。"
+  },
+  {
+    "id": "missing-source-question",
+    "category": "missing_information",
+    "name": "没有源材料时先问一个合并问题",
+    "input": "PTS 一下，帮我整理会议纪要。",
+    "should_trigger": true,
+    "expected_mode": "question",
+    "required": ["一次性询问会议记录或可用材料", "询问预期用途仅在会改变结果时"],
+    "forbidden": ["虚构会议内容", "输出空洞的完整 Prompt"],
+    "rationale": "信息不足状态应优先于默认成品模式。"
+  },
+  {
+    "id": "from-scratch-competitor-prompt",
+    "category": "from_scratch",
+    "name": "根据明确需求从零生成 Prompt",
+    "input": "帮我写一个 GPT-5.6 用的竞品分析 Prompt。对象是内容创作工具，面向产品经理，需要比较定位、核心功能、定价、用户评价和差异化机会，结果用表格加结论。",
+    "should_trigger": true,
+    "expected_mode": "final",
+    "required": ["内容创作工具", "产品经理", "五个比较维度", "表格和结论"],
+    "forbidden": ["要求用户重复已经提供的信息", "擅自加入完整市场研究项目"],
+    "rationale": "覆盖 MVP 的从零生成功能。"
+  },
+  {
+    "id": "brand-alias-only",
+    "category": "brand_boundary",
+    "name": "作者标识单独出现不执行 PTS",
+    "input": "supɃewhY",
+    "should_trigger": false,
+    "expected_mode": "none",
+    "required": ["作为作者或作品检索意图处理"],
+    "forbidden": ["编译 Prompt", "声称已经执行 PTS"],
+    "rationale": "保持品牌发现与功能执行分离。"
+  },
+  {
+    "id": "unrelated-pts-acronym",
+    "category": "trigger_boundary",
+    "name": "其他含义的 PTS 不触发",
+    "input": "请解释视频时间戳里的 PTS 和 DTS 有什么区别。",
+    "should_trigger": false,
+    "expected_mode": "none",
+    "required": ["回答时间戳概念"],
+    "forbidden": ["优化成 GPT-5.6 Prompt", "调用 PTS 方法"],
+    "rationale": "避免仅凭三个字母误触发。"
+  },
+  {
+    "id": "pst-contextual-typo",
+    "category": "trigger_boundary",
+    "name": "PST 在转换语境中按误输入兼容",
+    "input": "PST 一下这段提示词：帮我写一篇新品发布稿，面向已有用户，语气直接，重点解释升级价值。",
+    "should_trigger": true,
+    "expected_mode": "final",
+    "required": ["新品发布稿", "已有用户", "升级价值"],
+    "forbidden": ["纠正或训诫用户拼写", "在输出中把产品名写成 PST"],
+    "rationale": "只在明显的 Prompt 转换命令中容错。"
+  },
+  {
+    "id": "unrelated-pst-acronym",
+    "category": "trigger_boundary",
+    "name": "其他含义的 PST 不触发",
+    "input": "PST 和北京时间相差多少小时？",
+    "should_trigger": false,
+    "expected_mode": "none",
+    "required": ["回答时区问题"],
+    "forbidden": ["运行 Prompt 转换", "把 PST 改名为 PTS"],
+    "rationale": "误输入兼容不能覆盖正常缩写。"
+  },
+  {
+    "id": "preserve-claude-target",
+    "category": "target_preservation",
+    "name": "显式 PTS 时保留 Claude 目标",
+    "input": "PTS 这段给 Claude 用的提示词：审查代码变更，只列出会导致真实回归的问题，并引用文件位置。",
+    "should_trigger": true,
+    "expected_mode": "final",
+    "required": ["Claude", "真实回归", "文件位置"],
+    "forbidden": ["偷偷改成 GPT-5.6", "删除目标平台"],
+    "rationale": "PTS 优化指令表达，不擅自迁移平台。"
+  },
+  {
+    "id": "preserve-midjourney-syntax",
+    "category": "target_preservation",
+    "name": "保留 Midjourney 参数和语法",
+    "input": "PTS 一下这个 Midjourney Prompt：editorial portrait, hard side light, muted blue background --ar 4:5 --stylize 150",
+    "should_trigger": true,
+    "expected_mode": "final",
+    "required": ["Midjourney 语义", "--ar 4:5", "--stylize 150"],
+    "forbidden": ["转换成通用 GPT 图片说明", "丢失参数"],
+    "rationale": "平台语法属于不可变任务契约。"
+  },
+  {
+    "id": "preserve-image-identity-constraints",
+    "category": "constraint_preservation",
+    "name": "图像约束不能过度压缩",
+    "input": "PTS 一下：保持同一个人、五官比例、表情、发型方向、服装结构和原有饰品；只调整皮肤质感、灯光、背景和色彩；不得新增眼镜或耳饰。",
+    "should_trigger": true,
+    "expected_mode": "final",
+    "required": ["身份", "五官比例", "表情", "发型方向", "服装结构", "原有饰品", "禁止新增眼镜或耳饰"],
+    "forbidden": ["仅写保持人物不变", "删除任一独立控制项"],
+    "rationale": "长约束可能是功能信息，不是噪音。"
+  },
+  {
+    "id": "explain-existing-prompt",
+    "category": "output_mode",
+    "name": "已有 Prompt 的解释模式",
+    "input": "PTS 下这段提示词，并解释删了什么、补了什么、为什么：你是一位顶级专家，请全面专业地帮我分析附件。",
+    "should_trigger": true,
+    "expected_mode": "explain_existing",
+    "required": ["原 Prompt 的主要问题", "PTS 后的完整 Prompt", "关键修改依据"],
+    "forbidden": ["只输出最终 Prompt", "执行附件分析"],
+    "rationale": "解释是按需模式，不是默认输出。"
+  },
+  {
+    "id": "explain-from-brief",
+    "category": "output_mode",
+    "name": "从零生成的解释模式不假装存在原 Prompt",
+    "input": "帮我写一个 GPT-5.6 的访谈提纲 Prompt，并解释你的构建依据。访谈对象是刚开始用 AI 写作的内容创作者，目标是了解他们最常卡住的步骤。",
+    "should_trigger": true,
+    "expected_mode": "explain_brief",
+    "required": ["需求缺口与采用的假设", "完整 Prompt", "关键构建依据"],
+    "forbidden": ["原 Prompt 的主要问题", "编造用户已经写过 Prompt"],
+    "rationale": "解释模式必须区分已有 Prompt 和粗略需求。"
+  },
+  {
+    "id": "no-questions-use-placeholders",
+    "category": "missing_information",
+    "name": "禁止提问时使用占位符",
+    "input": "PTS 一下，不要问我问题：帮我写一个分析财报的 Prompt。",
+    "should_trigger": true,
+    "expected_mode": "final",
+    "required": ["{{公司或财报}}", "{{分析目的或受众}}", "不把预测当事实"],
+    "forbidden": ["编造公司名称", "编造财报数据", "向用户提问"],
+    "rationale": "占位符优于猜测结果相关信息。"
+  },
+  {
+    "id": "pts-and-execute-separated",
+    "category": "mvp_boundary",
+    "name": "PTS 不把直接执行固化为 Skill 模式",
+    "input": "先 PTS 这段需求，再直接执行：检查我的项目有没有失效链接。",
+    "should_trigger": true,
+    "expected_mode": "final_then_host_task",
+    "required": ["先交付转换后的 Prompt", "把后续执行视为宿主 Agent 的独立任务"],
+    "forbidden": ["在 PTS 规则中自行扩大授权", "把外部写入规则写进最终 Prompt 除非任务需要"],
+    "rationale": "MVP 负责 Prompt 编译，不把任务执行做成第三项功能。"
+  }
+]
