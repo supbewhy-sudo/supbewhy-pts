@@ -10,7 +10,7 @@ PTS 是围绕 GPT-5.6 这次模型更新制作的。OpenAI 的 GPT-5.6 指南强
 
 > **Task immutable; prompt mutable.** 任务不变，Prompt 可以重写。
 
-> **说明：** PTS 是独立开源项目，非 OpenAI 官方产品或官方 Skill。
+> **说明：** PTS 是由个人维护的公开项目，非 OpenAI 官方产品或官方 Skill。
 
 ## 关于作者
 
