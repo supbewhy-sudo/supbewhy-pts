@@ -72,6 +72,8 @@ class ReleaseContractTests(unittest.TestCase):
         )
 
         self.assertLess(readme.index("## 关于作者"), readme.index("## 为什么需要 PTS"))
+        self.assertIn("[在小红书关注我]", readme)
+        self.assertNotIn("[小红书：SUPBewhY]", readme)
         self.assertIn(canonical, readme)
         for tracking_key in ("xsec_token", "xhsshare", "appuid", "share_id", "wechatWid"):
             self.assertNotIn(tracking_key, readme)
